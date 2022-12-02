@@ -38,15 +38,28 @@ class _MyHomePageState extends State<MyHomePage> {
           title: Text('Flutter Demo Home Page'),
         ),
         body: ListView(
+          scrollDirection: Axis.horizontal,
           children: [
-            ListTile(
-              leading: Icon(Icons.person),
-              trailing: Container(
-                height: 100,
-                child: Icon(Icons.arrow_right_rounded, size: 45),
-              ),
-              title: Text('Marcos'),
-            )
+            Container(
+              width: 150,
+              color: Colors.red,
+            ),
+            Container(
+              width: 150,
+              color: Colors.blue,
+            ),
+            Container(
+              width: 150,
+              color: Colors.green,
+            ),
+            Container(
+              width: 150,
+              color: Colors.yellow,
+            ),
+            Container(
+              width: 150,
+              color: Colors.purple,
+            ),
           ],
         ));
   }
