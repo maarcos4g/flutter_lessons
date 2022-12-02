@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'models/user_model.dart';
+
 import 'screens/home_page.dart';
+import 'screens/login_page.dart';
 
 void main() {
   runApp(MultiProvider(
@@ -24,9 +26,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       routes: {
-        '/home': (context) => HomePage(),
+        '/': (context) => LoginPage(),
+        '/login': (context) => HomePage(),
       },
-      initialRoute: '/home',
+      initialRoute: '/',
       debugShowCheckedModeBanner: false,
     );
   }

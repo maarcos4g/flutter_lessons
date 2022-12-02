@@ -26,21 +26,37 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: [
               TextFormField(
-                decoration: InputDecoration(hintText: 'Digite seu nome'),
+                decoration: InputDecoration(hintText: 'Digite seu email', ),
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'Você precisa digitar um nome';
+                    return 'Você precisa digitar um e-mail';
                   } 
                   return null;
                 },
               ),
+              Padding(padding: EdgeInsets.only(bottom: 20)),
+              TextFormField(
+                decoration: InputDecoration(hintText: 'Digite sua senha'),
+                obscureText: true,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Você precisa digitar uma senha';
+                  }
+
+                  if (value.length < 4) {
+                    return 'Senha muito curta';
+                  }  
+                  return null;
+                },
+              ),
+              Padding(padding: EdgeInsets.only(bottom: 20)),
               ElevatedButton(
                 onPressed: () {
                   if(_formKey.currentState!.validate()) {
                     print('Formulário Validado');
                   }
                 },
-                child: Text('Enviar'),
+                child: Text('Entrar'),
               )
             ],
           ),
