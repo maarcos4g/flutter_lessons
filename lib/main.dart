@@ -35,22 +35,41 @@ class MyHomePage extends StatelessWidget {
     var screen = MediaQuery.of(context).size;
 
     return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text('My Contacts'),
-        ),
-        body: ListView.builder(
-            padding: EdgeInsets.all(20),
-            itemCount: contacts.length,
-            itemBuilder: (context, index) {
-              return ListTile(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text('My Contacts'),
+      ),
+      body: ListView.builder(
+          padding: EdgeInsets.all(20),
+          itemCount: contacts.length,
+          itemBuilder: (context, index) {
+            return ListTile(
                 leading: Icon(
                   Icons.person,
                   size: 28,
                 ),
                 title: Text('${contacts[index]}'),
-                trailing: Icon(Icons.call, size: 28, )
-              );
-            }));
+                trailing: Icon(
+                  Icons.call,
+                  size: 28,
+                ));
+          }),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            DrawerHeader(
+              child: Text("Header"),
+              decoration: BoxDecoration(
+                color: Colors.green,
+              ),
+            ),
+            ListTile(
+              title: Text("Item 1"),
+              onTap: () {},
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
