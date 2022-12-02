@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:provider/provider.dart';
 
-class HomePage extends StatefulWidget {
+import '../models/counter_model.dart';
+
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  int count = 0;
-  var background = Colors.white;
 
   @override
   Widget build(BuildContext context) {
@@ -23,30 +16,30 @@ class _HomePageState extends State<HomePage> {
         title: Text('Counter'),
       ),
       body: Container(
-        color: background,
         width: screen.width,
         height: screen.height,
         child: Column(
           children: <Widget>[
             Text('Contagem'),
-            Text(count.toString()),
-            SizedBox(height: screen.height - 250),
-              ElevatedButton(
-                onPressed: () => {
-                  setState((() {
-                    background = Colors.blue;
-                  }))
-                },
-                child: Text('Trocar Fundo'),
+            Consumer<Counter>(
+              builder: (context, value, child) => Text(
+                value.count.toString()
               ),
+            ),
+            Container(
+              child: ElevatedButton(
+                child: Text("Outra página"),
+                onPressed: () {
+                  Navigator.pushNamed(context, '/widget');
+                },
+              ),
+            )
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          setState(() {
-            count++;
-          });
+          Provider.of<Counter>(context, listen: false).increment();
         },
         child: Text('+1'),
       ),

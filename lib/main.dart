@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'models/counter_model.dart';
 
 import 'screens/home_page.dart';
+import 'screens/widget_page.dart';
 
 void main() {
-  runApp( MyApp());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (context) => Counter()),
+    ],
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -17,7 +26,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       routes: {
-        '/home': (context) => HomePage(), 
+        '/home': (context) => HomePage(),
+        '/widget': (context) => WidgetPage(),
       },
       initialRoute: '/home',
       debugShowCheckedModeBanner: false,
