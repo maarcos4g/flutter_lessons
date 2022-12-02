@@ -14,53 +14,43 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class MyHomePage extends StatelessWidget {
+  var contacts = [
+    'Marcos',
+    'Paulo',
+    'John',
+    'Adriana',
+    'Carolina',
+    'Tainá',
+  ];
 
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    var screen = MediaQuery.of(context).size;
+
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text('Flutter Demo Home Page'),
+          title: Text('My Contacts'),
         ),
-        body: ListView(
-          scrollDirection: Axis.horizontal,
-          children: [
-            Container(
-              width: 150,
-              color: Colors.red,
-            ),
-            Container(
-              width: 150,
-              color: Colors.blue,
-            ),
-            Container(
-              width: 150,
-              color: Colors.green,
-            ),
-            Container(
-              width: 150,
-              color: Colors.yellow,
-            ),
-            Container(
-              width: 150,
-              color: Colors.purple,
-            ),
-          ],
-        ));
+        body: ListView.builder(
+            padding: EdgeInsets.all(20),
+            itemCount: contacts.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                leading: Icon(
+                  Icons.person,
+                  size: 28,
+                ),
+                title: Text('${contacts[index]}'),
+                trailing: Icon(Icons.call, size: 28, )
+              );
+            }));
   }
 }
