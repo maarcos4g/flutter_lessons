@@ -1,47 +1,50 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter/src/widgets/framework.dart';
 
-import '../models/counter_model.dart';
-
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    var screen = MediaQuery.of(context).size;
+  State<HomePage> createState() => _HomePageState();
+}
 
+class _HomePageState extends State<HomePage> {
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Counter'),
+        title: Text('Formulário'),
       ),
-      body: Container(
-        width: screen.width,
-        height: screen.height,
-        child: Column(
-          children: <Widget>[
-            Text('Contagem'),
-            Consumer<Counter>(
-              builder: (context, value, child) => Text(
-                value.count.toString()
-              ),
-            ),
-            Container(
-              child: ElevatedButton(
-                child: Text("Outra página"),
-                onPressed: () {
-                  Navigator.pushNamed(context, '/widget');
+      body: Form(
+        key: _formKey,
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: Column(
+            children: [
+              TextFormField(
+                decoration: InputDecoration(hintText: 'Digite seu nome'),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Você precisa digitar um nome';
+                  } 
+                  return null;
                 },
               ),
-            )
-          ],
+              ElevatedButton(
+                onPressed: () {
+                  if(_formKey.currentState!.validate()) {
+                    print('Formulário Validado');
+                  }
+                },
+                child: Text('Enviar'),
+              )
+            ],
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Provider.of<Counter>(context, listen: false).increment();
-        },
-        child: Text('+1'),
       ),
     );
   }
